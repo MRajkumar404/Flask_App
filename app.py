@@ -1,20 +1,39 @@
-from flask import Flask, render_template
-import requests
+from flask import Flask, render_template, request, redirect
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    # Fetch data from the API
-    api_url = 'https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2024-07-09&end_date=2024-07-23&hourly=temperature_2m'
-    response = requests.get(api_url)
-    if response.status_code == 200:
-        api_data = response.json()
-    else:
-        api_data = {}
+@app.cli.command('create-db')
+def create_db():
+    """Create database tables."""
+    with app.app_context():
+        db.create_all()
+        print("Database tables created.")
 
+
+# Set the database URI
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///loginform.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Initialize the database with the app
+db = SQLAlchemy(app)
+
+@app.route('/',methods=['GET'])
+
+def index():
+    
     # Pass the data to the HTML template
-    return render_template('index.html', data=api_data)
+    return render_template('index.html')
+
+@app.route('/',methods=['POST'])
+def add():
+    data = request.form['usr_na']
+    print(data)
+    return redirect('/')
+
 
 if __name__ == '__main__':
+    # Create database tables
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)

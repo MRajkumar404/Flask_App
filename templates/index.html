@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login & Sign Up</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='style.css' )}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" href="https://www.pngfind.com/pngs/m/128-1286693_flask-framework-logo-svg-hd-png-download.png" type="image/x-icon">
 </head>
 <body>
@@ -17,35 +17,62 @@
                 <button type="submit">Login</button>
                 <p>Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
             </form>
-            <form id="signup-form">
+            <form id="signup-form" method="post">
                 <h2>Sign Up</h2>
-                <input type="text" placeholder="Username" required>
-                <input type="email" placeholder="Email" required>
-                <input type="password" placeholder="Password" required>
-                <input type="password" placeholder="Confirm Password" required>
+                <input type="text" name="usr_na" placeholder="Username" required>
+                <input type="email" name="usr_em" placeholder="Email" required>
+                <input type="password" name="usr_pas" placeholder="Password" required>
+                <input type="password" name="usr_cnfr" placeholder="Confirm Password" required>
                 <button type="submit">Sign Up</button>
                 <p>Already have an account? <a href="#" id="show-login">Login</a></p>
             </form>
         </div>
+        
+        <div class="table-container" id="signup-table">
+            <h2>Signup Data</h2>
+            <table >
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>user1</td>
+                        <td>user1@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>user2</td>
+                        <td>user2@example.com</td>
+                    </tr>
+                    <!-- Add more static rows as needed -->
+                </tbody>
+            </table>
+        </div>
     </div>
-
-
 
     <script>
         const loginForm = document.getElementById('login-form');
         const signupForm = document.getElementById('signup-form');
         const showSignup = document.getElementById('show-signup');
         const showLogin = document.getElementById('show-login');
+        const signupTable = document.getElementById('signup-table');
 
         showSignup.addEventListener('click', () => {
             loginForm.style.display = 'none';
             signupForm.style.display = 'block';
+            signupTable.style.display = 'block';
         });
 
         showLogin.addEventListener('click', () => {
             signupForm.style.display = 'none';
             loginForm.style.display = 'block';
+            signupTable.style.display = 'none';
         });
+
+        // Initially hide the signup table
+        signupTable.style.display = 'none';
     </script>
 </body>
 </html>
