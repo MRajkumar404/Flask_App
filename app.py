@@ -27,8 +27,14 @@ def index():
 
 @app.route('/',methods=['POST'])
 def add():
-    data = request.form['usr_na']
-    print(data)
+    user_name = request.form['usr_na']
+    print(user_name)
+    email = request.form['usr_em']
+    print(email)
+    passwo = request.form['usr_pas']
+    print(passwo)
+    con_pass = request.form['usr_cnfr']
+    print(con_pass)
     return redirect('/')
 
 
