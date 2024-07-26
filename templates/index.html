@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="icon" href="https://www.pngfind.com/pngs/m/128-1286693_flask-framework-logo-svg-hd-png-download.png" type="image/x-icon">
 </head>
-<body>
+<body >
     <div class="container">
         <div class="form-container">
             {% with messages = get_flashed_messages(with_categories=True) %}
@@ -20,11 +20,11 @@
                 {% endif %}
             {% endwith %}
             
-            <form id="login-form">
+            <form id="login-form" action="{{ url_for('login') }}" method="post">
                 <h2>Login</h2>
-                <input type="text" placeholder="Username" required>
+                <input type="text" name="username" placeholder="Username" required>
                 <div class="password-container">
-                    <input type="password" id="login-password" placeholder="Password" required>
+                    <input type="password" name="password" id="login-password" placeholder="Password" required>
                     <span class="eye-icon" onclick="togglePassword('login-password')">
                         👁️
                     </span>

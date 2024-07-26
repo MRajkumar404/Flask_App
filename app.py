@@ -50,6 +50,18 @@ def add():
     flash('User added successfully!', 'success')
     return redirect('/')
 
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+
+    user = User.query.filter_by(username=username, password=password).first()
+    if user:
+        return redirect('https://www.google.com')  # Redirect to another website
+    else:
+        flash('Invalid username or password.', 'error')
+        return redirect('/')
+
 @app.route('/delete_user/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     user = User.query.get(user_id)
