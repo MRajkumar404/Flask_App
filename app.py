@@ -18,6 +18,7 @@ class User(db.Model):
     email = db.Column(db.String(100))
     password = db.Column(db.String(100))
 
+
 @app.route('/')
 def index():
     users = User.query.all()
